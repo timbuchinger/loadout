@@ -404,4 +404,3 @@ For more information:
 - Task-based organization for tool collections
 - Reference documentation for complex domains
 - Asset bundling for templates and resources
-

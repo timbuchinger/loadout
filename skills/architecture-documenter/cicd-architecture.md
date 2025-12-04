@@ -15,6 +15,7 @@ flowchart LR
 ```
 
 ## Details
+
 - Branching strategy:
 - CI steps:
 - Test strategy:

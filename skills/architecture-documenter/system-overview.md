@@ -13,6 +13,7 @@ flowchart LR
 ```
 
 ## Summary
+
 - System purpose:
 - Major components:
 - External integrations:

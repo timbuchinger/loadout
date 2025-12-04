@@ -16,6 +16,7 @@ flowchart TB
 ```
 
 ## Key Components
+
 - Regions / Zones:
 - Networking:
 - Load Balancers:

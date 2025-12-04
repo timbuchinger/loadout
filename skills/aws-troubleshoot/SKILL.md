@@ -6,10 +6,12 @@ description: "Troubleshoot AWS services using tool-first access (via MCP when av
 # AWS Troubleshooting Skill
 
 ## General Guidance
+
 Always use **tool access first** for logs, metrics, and audit events.  
 Fallback to AWS CLI commands **only** when deeper inspection is required or the tool cannot access specific data.
 
 All investigations should:
+
 1. Scope log queries by log group and time window  
 2. Check CloudTrail for failed API calls  
 3. Use service-specific metrics before guessing  
@@ -17,77 +19,106 @@ All investigations should:
 
 ---
 
-# Core Services Covered
+## Core Services Covered
 
-## EKS
+### EKS
+
 Common issues:
+
 - Image pull errors
 - Pod pending (CNI/IP exhaustion)
 - CrashLoopBackOff
-- Node NotReady  
+- Node NotReady
+
 Investigations:
+
 - Query pod logs
 - Query pod events
 - Inspect node status and cluster metrics
 
-## S3
+### S33
+
 Common issues:
+
 - AccessDenied
 - Incorrect KMS key
-- BlockPublicAccess conflicts  
+- BlockPublicAccess conflicts
+
 Investigations:
+
 - Query S3 server access logs
 - Inspect CloudTrail for denied events
 
-## ECR
+### ECRR
+
 Common issues:
+
 - Token expiration
 - Missing permissions
-- Architecture mismatch  
+- Architecture mismatch
+
 Investigations:
+
 - Search CloudTrail for `ecr:*` denied actions
 - Inspect repository push/pull failures
 
-## EC2
+### EC22
+
 Common issues:
+
 - Failed instance boot
 - ENI/network issues
-- IMDSv2 access failures  
+- IMDSv2 access failures
+
 Investigations:
+
 - Check EC2 instance status checks
 - Inspect system logs and VPC configuration
 
-## Networking & VPN
+### Networking & VPNN
+
 Common issues:
+
 - Route mismatches
 - NACL/Security Group blocks
-- VPN tunnel down  
+- VPN tunnel down
+
 Investigations:
+
 - Query CloudWatch metrics for VPN TunnelState
 - Validate routing tables and security groups
 
-## IAM Identity Center (SSO)
+### IAM Identity Center (SSO))
+
 Common issues:
+
 - User not assigned
-- Permission set mismatch  
+- Permission set mismatch
+
 Investigations:
+
 - Inspect activity logs for SSO authentication issues
 - Validate permission sets
 
-## IAM
+### IAMM
+
 Common issues:
+
 - AccessDenied
-- Incorrect role assumption  
+- Incorrect role assumption
+
 Investigations:
+
 - Query CloudTrail for denied API events
 - Identify missing permissions
 
 ---
 
-# Workflow
+## Workflow
+
 1. Identify service  
 2. Query scoped logs  
 3. Query CloudTrail for denied API calls  
 4. Query metrics when relevant  
 5. Diagnose using AWS-specific heuristics  
-6. Provide safe remediation steps  
+6. Provide safe remediation steps
