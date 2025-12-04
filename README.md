@@ -25,6 +25,7 @@ Just like choosing the right gear in a game, this loadout ensures your agent has
 - **test-driven-development** - Implements features and bugfixes using TDD approach: write test first, watch it fail, write minimal code to pass.
 - **user-story** - Creates well-structured user stories with clear acceptance criteria or task lists for software development.
 - **using-git-worktrees** - Creates isolated git worktrees for feature work with smart directory selection and safety verification.
+- **webapp-testing** - Toolkit for testing local web applications with Playwright, including server lifecycle management and browser automation examples.
 - **writing-plans** - Creates comprehensive implementation plans with exact file paths, complete code examples, and verification steps.
 - **writing-skills** - Applies TDD to skill documentation by testing with subagents before writing, iterating until bulletproof against rationalization.
 
