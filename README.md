@@ -14,6 +14,7 @@ Just like choosing the right gear in a game, this loadout ensures your agent has
 
 ## Available Skills
 
+- **brainstorming** - Refines rough ideas into fully-formed designs through collaborative questioning, alternative exploration, and incremental validation before writing code.
 - **code-review** - Performs focused code reviews checking for obvious defects only, with minimal feedback and clear approval/rejection format.
 - **create-pull-request** - Creates pull requests with clear, concise descriptions using available tools in the source repository.
 - **executing-plans** - Loads and executes implementation plans in controlled batches with review checkpoints between each batch.

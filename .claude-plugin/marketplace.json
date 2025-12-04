@@ -11,13 +11,14 @@
   "plugins": [
     {
       "name": "loadout-skills",
-      "description": "Collection of engineering and troubleshooting skills including cloud platform troubleshooting (AWS, Azure, GCP), observability (Loki, Mimir, Tempo), Kubernetes management, development workflows (TDD, code review, PR creation), planning and execution, architecture documentation, and user story creation",
+      "description": "Collection of engineering and troubleshooting skills including idea brainstorming, cloud platform troubleshooting (AWS, Azure, GCP), observability (Loki, Mimir, Tempo), Kubernetes management, development workflows (TDD, code review, PR creation), planning and execution, architecture documentation, and user story creation",
       "source": "./",
       "strict": false,
       "skills": [
         "./skills/architecture-documenter",
         "./skills/aws-troubleshoot",
         "./skills/azure-troubleshoot",
+        "./skills/brainstorming",
         "./skills/code-review",
         "./skills/create-pull-request",
         "./skills/executing-plans",
