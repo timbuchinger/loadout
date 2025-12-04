@@ -1,5 +1,7 @@
 # Loadout
 
+![Loadout](icon-resized.png)
+
 A curated loadout of modular skills—specialized tools and knowledge packs you can equip before tackling complex engineering missions.
 Just like choosing the right gear in a game, this loadout ensures your agent has exactly what it needs to operate efficiently and solve problems with precision.
 
