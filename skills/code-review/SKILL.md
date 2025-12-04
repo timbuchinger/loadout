@@ -18,6 +18,16 @@ Perform focused code reviews that identify only obvious defects. Keep feedback m
 - User requests code feedback
 - User asks "can you review this?"
 
+## User Intent
+
+**Listen for explicit submission intent:**
+
+- "Review this code and submit comment" → Prepare to submit after showing review
+- "Review and comment on PR #123" → Prepare to submit after showing review
+- "Review this" or "Can you review?" → Show review, ask before submitting
+
+**Default behavior:** Show review first, then ask user if they want to submit it.
+
 ## Review Process
 
 ### 1. Retrieve the Code
@@ -47,6 +57,8 @@ Use available tools to get the PR or code:
 - Personal preferences
 
 ### 3. Provide Verdict
+
+**Always show the review to the user first.**
 
 #### If Approved
 
@@ -86,6 +98,17 @@ Cannot approve due to:
 3. Breaking changes
 4. Critical performance issues
 5. Missing test coverage for new logic
+
+### 4. Ask About Submission
+
+After showing the review:
+
+- **If user indicated "submit" or "comment"**: Ask "Should I submit this review comment to the PR?"
+- **If user didn't specify**: Ask "Would you like me to submit this review as a comment on the PR?"
+
+**Only submit if user confirms.**
+
+If user declines, treat the review as complete (they can copy/paste or edit before submitting themselves).
 
 ## Review Examples
 

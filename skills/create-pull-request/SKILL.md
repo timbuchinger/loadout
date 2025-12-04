@@ -18,6 +18,16 @@ Create pull requests with clear, concise descriptions. Use available tools to cr
 - User requests "open a PR"
 - User says "submit this for review"
 
+## User Intent
+
+**Listen for explicit submission intent:**
+
+- "Create a PR for this in GitHub" → Prepare to submit after showing preview
+- "Create and submit PR" → Prepare to submit after showing preview
+- "Create a pull request" → Show preview, ask before submitting
+
+**Default behavior:** Show PR preview first, then ask user if they want to submit it.
+
 ## Process
 
 ### 1. Gather Changes
@@ -28,20 +38,21 @@ Determine what's being submitted:
 - Identify the branch being merged
 - Review commit messages for context
 
-### 2. Create PR Using Available Tools
+### 2. Prepare PR Content
 
-Use the appropriate tool for the repository:
-
-- **GitHub**: `mcp_github_create_pull_request` or similar
-- **GitLab**: Use GitLab tools if available
-- **Other**: Use platform-specific PR creation tools
-
-Required information:
+Determine information needed for PR creation:
 
 - Base branch (usually `main` or `master`)
 - Head branch (current working branch)
 - Title (max 8 words)
 - Description (following template)
+
+Identify the appropriate tool for the repository:
+
+- **GitHub**: `mcp_github_create_pull_request` or similar
+- **GitLab**: Use GitLab tools if available
+- **Azure DevOps**: Use Azure Devops tools if avilable
+- **Other**: Use platform-specific PR creation tools
 
 ### 3. Write Title
 
@@ -78,9 +89,29 @@ Follow the template in `template.md`. Keep it under 100 words unless:
 1. Summary (2-3 sentences max)
 2. Known Issues section (only if needed)
 
-### 5. Submit PR
+### 5. Show Preview and Ask for Confirmation
 
-Create the PR using the appropriate tool and confirm success.
+**Always show the PR content to the user first:**
+
+Display:
+
+- Title
+- Description
+- Base and head branches
+- Target repository
+
+Then ask:
+
+- **If user indicated "create in GitHub" or "submit"**: Ask "Should I create this PR in the repository?"
+- **If user didn't specify**: Ask "Would you like me to create this PR?"
+
+**Only create the PR if user confirms.**
+
+If user declines, they can:
+
+- Edit the content
+- Create the PR manually using the provided content
+- Request changes and regenerate
 
 ## Using the Template
 
