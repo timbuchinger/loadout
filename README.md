@@ -1,9 +1,7 @@
 # Loadout
 
-![Loadout](icon-resized.png)
-
 <p align="center">
-  <img src="icon-resized.png" width="300" />
+  <img src="icon-resized.png" alt="A loadout crate of LLM skills" />
 </p>
 
 A curated loadout of modular skills—specialized tools and knowledge packs you can equip before tackling complex engineering missions.
