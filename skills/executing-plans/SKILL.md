@@ -33,7 +33,7 @@ Load plan, review critically, execute tasks in batches, report for review betwee
 
 ### Step 2: Execute Batch
 
-**Default: First 3 tasks**
+#### Default: First 3 tasks
 
 For each task in the batch:
 
@@ -138,7 +138,7 @@ Don't try to work around blockers - stop and get guidance.
 
 ### Batch 1 Report
 
-```
+```text
 Completed tasks 1-3:
 
 Task 1: Email Validation
@@ -169,17 +169,17 @@ All verifications passed. Ready for feedback.
 
 ## Quick Reference
 
-| Step | Action | When to Stop |
-|------|--------|--------------|
-| 1. Load | Review plan critically | Concerns found |
-| 2. Execute | Implement 3 tasks | Blocker hit |
-| 3. Report | Show results, ask for feedback | - |
-| 4. Continue | Next batch based on feedback | All tasks done |
-| 5. Complete | Final verification | - |
+| Step     | Action                        | When to Stop   |
+|----------|-------------------------------|----------------|
+| 1. Load      | Review plan critically         | Concerns found |
+| 2. Execute   | Implement 3 tasks              | Blocker hit    |
+| 3. Report    | Show results, ask for feedback | -              |
+| 4. Continue  | Next batch based on feedback   | All tasks done |
+| 5. Complete  | Final verification             | -              |
 
 ## Final Rule
 
-```
+```text
 Follow the plan exactly.
 Stop when blocked or uncertain.
 Report at checkpoints.

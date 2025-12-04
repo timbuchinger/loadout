@@ -96,8 +96,8 @@ If multiple contexts exist:
 
 ## Example User Requests → Recommended Actions
 
-| User wants | Preferred (MCP) | Fallback (kubectl) |
-|-----------|-----------------|-------------------|
+| User wants                          | Preferred (MCP)                                                                         | Fallback (kubectl)                                                  |
+|-------------------------------------|-----------------------------------------------------------------------------------------|---------------------------------------------------------------------|
 | "List pods in frontend namespace" | `list pods --namespace=frontend` | `kubectl get pods -n frontend` |
 | "Show me events for api-server" | `get events --namespace=<ns> --field-selector=involvedObject.name=api-server` | `kubectl get events -n <ns> --field-selector involvedObject.name=api-server` |
 | "Get logs for db-0" | `logs --namespace=<ns> --pod=db-0` | `kubectl logs -n <ns> db-0` |

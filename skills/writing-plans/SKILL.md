@@ -93,8 +93,6 @@ git add tests/path/test.py src/path/file.py
 git commit -m "feat: add specific feature"
 ```
 
-```
-
 ## Essential Elements
 
 ### Exact File Paths
@@ -203,8 +201,6 @@ git add tests/validators/test_email.py src/validators/email.py
 git commit -m "feat: add email validation"
 ```
 
-```
-
 ## Best Practices
 
 **Be specific:**
@@ -251,7 +247,7 @@ git commit -m "feat: add email validation"
 
 ## Final Rule
 
-```
+```text
 Plans should be executable by someone skilled but unfamiliar.
 Every step: exact paths, complete code, clear verification.
 ```

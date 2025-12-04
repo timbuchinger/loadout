@@ -160,8 +160,8 @@ Fix these issues and re-request review.
 
 ## Quick Reference
 
-| Situation | Action |
-|-----------|--------|
+| Situation                   | Action                          |
+|-----------------------------|--------------------------------|
 | No obvious defects | Approve with brief reason |
 | Security issue | Reject, list as #1 priority |
 | Logic bug | Reject, explain the bug |

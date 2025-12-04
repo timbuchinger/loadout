@@ -32,10 +32,11 @@ When a user asks you (Claude) for help inspecting logs via Loki — e.g. “find
 
 ## Example Queries
 
-| User Request | Resulting LogQL |
-|--------------|----------------|
-| “Show me all 500 errors in the `orders` service in the last 2 hours.” | `{app="orders", env="prod"}[2h] |= "500"` |
-| “Find logs for request_id `abc123` in staging for `payments` service over past 30 minutes.” | `{app="payments", env="staging"}[30m] |= "abc123"` |
+| User Request                                                                                     | Resulting LogQL                                  |
+|--------------------------------------------------------------------------------------------------|--------------------------------------------------|
+| "Show me all 500 errors in the `orders` service in the last 2 hours."                            | `{app="orders", env="prod"}[2h] \|= "500"`        |
+| "Find logs for request_id `abc123` in staging for `payments` service over past 30 minutes."      | `{app="payments", env="staging"}[30m] \|= "abc123"` |
 
 ## Limitations
-- This skill does not execute queries  
+
+- This skill does not execute queries

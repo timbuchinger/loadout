@@ -193,8 +193,8 @@ behavior unchanged, only structure modified for better isolation.
 
 ## Quick Reference
 
-| Element | Constraint | Purpose |
-|---------|-----------|---------|
+| Element      | Constraint                 | Purpose                   |
+|--------------|----------------------------|---------------------------|
 | Title | Max 8 words | Quick scan of what changed |
 | Summary | 2-3 sentences (~50 words) | Core changes and rationale |
 | Known Issues | Only if needed | Preempt review questions |

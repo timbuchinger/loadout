@@ -12,11 +12,18 @@ Skills are folders of instructions, scripts, and resources that Claude loads dyn
 
 This repository uses markdownlint to maintain consistent formatting. After making ANY changes to `.md` files:
 
-1. Check for linting errors in VS Code (if using the `davidanson.vscode-markdownlint` extension, errors appear as squiggly lines)
+1. **Run markdownlint locally on ALL files** (same as CI):
+
+   ```bash
+   npx markdownlint-cli2 "**/*.md"
+   ```
+
 2. Fix all linting errors before committing
-3. Verify no errors remain
+3. Verify the command returns `Summary: 0 error(s)`
 
 The repository includes `.markdownlint.json` configuration. All Markdown files must pass linting with this configuration.
+
+**CRITICAL: Do NOT rely on `get_errors` or VS Code extension alone** - these only check files in VS Code's context, not all markdown files. Always run `markdownlint-cli2` on the entire repository to match CI behavior exactly.
 
 **Never commit Markdown files with linting errors.**
 
