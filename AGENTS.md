@@ -40,6 +40,19 @@ After creating, updating, or removing a skill:
 
 This ensures users can quickly discover and understand available skills without diving into individual SKILL.md files.
 
+## CRITICAL: Marketplace Manifest Maintenance
+
+**ALWAYS update `.claude-plugin/marketplace.json` when creating, modifying, or removing skills.**
+
+After creating, updating, or removing a skill:
+
+1. Add/remove/update the skill path in the `skills` array under the `loadout-skills` plugin
+2. Keep skill paths in alphabetical order
+3. Update the plugin's `description` field if the overall collection's scope changes
+4. Ensure all skill paths use the format `./skills/skill-name`
+
+The marketplace.json file defines the skill collection for Claude and must stay synchronized with the actual skills directory. All skills should be in a single plugin named `loadout-skills`.
+
 ## Skill Components
 
 Every skill consists of two main parts:

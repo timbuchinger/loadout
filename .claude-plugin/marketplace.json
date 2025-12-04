@@ -1,0 +1,35 @@
+{
+  "name": "loadout-skills",
+  "owner": {
+    "name": "timbuchinger",
+    "email": "noreply@github.com"
+  },
+  "metadata": {
+    "description": "A curated loadout of modular skills—specialized tools and knowledge packs for complex engineering missions",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "loadout-skills",
+      "description": "Collection of engineering and troubleshooting skills including cloud platform troubleshooting (AWS, Azure, GCP), observability (Loki, Mimir, Tempo), Kubernetes management, development workflows (TDD, code review, PR creation), planning and execution, architecture documentation, and user story creation",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/architecture-documenter",
+        "./skills/aws-troubleshoot",
+        "./skills/azure-troubleshoot",
+        "./skills/code-review",
+        "./skills/create-pull-request",
+        "./skills/executing-plans",
+        "./skills/gcp-troubleshoot",
+        "./skills/kubernetes-troubleshoot",
+        "./skills/loki-troubleshoot",
+        "./skills/mimir-prometheus-troubleshoot",
+        "./skills/tempo-troubleshoot",
+        "./skills/test-driven-development",
+        "./skills/user-story",
+        "./skills/writing-plans"
+      ]
+    }
+  ]
+}
