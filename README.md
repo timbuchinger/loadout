@@ -26,6 +26,7 @@ Just like choosing the right gear in a game, this loadout ensures your agent has
 - **user-story** - Creates well-structured user stories with clear acceptance criteria or task lists for software development.
 - **using-git-worktrees** - Creates isolated git worktrees for feature work with smart directory selection and safety verification.
 - **writing-plans** - Creates comprehensive implementation plans with exact file paths, complete code examples, and verification steps.
+- **writing-skills** - Applies TDD to skill documentation by testing with subagents before writing, iterating until bulletproof against rationalization.
 
 ## Creating Skills
 
