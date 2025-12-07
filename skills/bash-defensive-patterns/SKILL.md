@@ -530,6 +530,201 @@ check_dependencies() {
 check_dependencies
 ```
 
+## Real-World Examples
+
+### Example 1: Backup Script with Rotation
+
+```bash
+#!/bin/bash
+set -Eeuo pipefail
+
+# Configuration
+readonly BACKUP_SOURCE="/var/www/html"
+readonly BACKUP_DEST="/backup/website"
+readonly MAX_BACKUPS=7
+readonly TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+
+# Setup logging
+log_info() {
+    echo "[$(date +'%Y-%m-%d %H:%M:%S')] INFO: $*" >&2
+}
+
+log_error() {
+    echo "[$(date +'%Y-%m-%d %H:%M:%S')] ERROR: $*" >&2
+}
+
+# Cleanup temporary files on exit
+cleanup() {
+    if [[ -n "${TEMP_ARCHIVE:-}" && -f "$TEMP_ARCHIVE" ]]; then
+        rm -f "$TEMP_ARCHIVE"
+    fi
+}
+
+trap cleanup EXIT
+
+# Validate source directory exists
+[[ -d "$BACKUP_SOURCE" ]] || {
+    log_error "Source directory not found: $BACKUP_SOURCE"
+    exit 1
+}
+
+# Create backup destination if needed
+mkdir -p "$BACKUP_DEST" || {
+    log_error "Cannot create backup directory: $BACKUP_DEST"
+    exit 1
+}
+
+# Create backup with atomic write
+TEMP_ARCHIVE=$(mktemp) || exit 1
+log_info "Creating backup archive..."
+
+tar -czf "$TEMP_ARCHIVE" -C "$(dirname "$BACKUP_SOURCE")" "$(basename "$BACKUP_SOURCE")" || {
+    log_error "Failed to create backup archive"
+    exit 1
+}
+
+# Move to final location atomically
+FINAL_BACKUP="$BACKUP_DEST/backup_$TIMESTAMP.tar.gz"
+mv "$TEMP_ARCHIVE" "$FINAL_BACKUP"
+log_info "Backup saved to: $FINAL_BACKUP"
+
+# Rotate old backups
+log_info "Rotating old backups..."
+while IFS= read -r -d '' backup; do
+    rm -f "$backup"
+    log_info "Removed old backup: $(basename "$backup")"
+done < <(find "$BACKUP_DEST" -name "backup_*.tar.gz" -type f -print0 | sort -z | head -z -n -"$MAX_BACKUPS")
+
+log_info "Backup completed successfully"
+```
+
+### Example 2: Deploy Script with Validation
+
+```bash
+#!/bin/bash
+set -Eeuo pipefail
+
+# Script configuration
+DEPLOY_ENV="${DEPLOY_ENV:-staging}"
+DRY_RUN="${DRY_RUN:-false}"
+
+# Validate environment
+case "$DEPLOY_ENV" in
+    staging|production)
+        readonly DEPLOY_PATH="/var/www/$DEPLOY_ENV"
+        readonly SERVICE_NAME="app-$DEPLOY_ENV"
+        ;;
+    *)
+        echo "ERROR: Invalid environment: $DEPLOY_ENV (must be staging or production)" >&2
+        exit 1
+        ;;
+esac
+
+# Check required commands
+check_dependencies() {
+    local -a required=("rsync" "systemctl" "git")
+    local -a missing=()
+
+    for cmd in "${required[@]}"; do
+        if ! command -v "$cmd" &>/dev/null; then
+            missing+=("$cmd")
+        fi
+    done
+
+    if [[ ${#missing[@]} -gt 0 ]]; then
+        echo "ERROR: Missing required commands: ${missing[*]}" >&2
+        return 1
+    fi
+}
+
+# Execute command with dry-run support
+run_cmd() {
+    if [[ "$DRY_RUN" == "true" ]]; then
+        echo "[DRY RUN] Would execute: $*"
+        return 0
+    fi
+    "$@"
+}
+
+# Main deployment
+check_dependencies
+
+echo "Deploying to: $DEPLOY_ENV"
+echo "Deploy path: $DEPLOY_PATH"
+
+# Create backup before deployment
+BACKUP_DIR="$DEPLOY_PATH.backup.$(date +%Y%m%d_%H%M%S)"
+run_cmd cp -a "$DEPLOY_PATH" "$BACKUP_DIR"
+
+# Deploy new code
+run_cmd rsync -av --delete ./build/ "$DEPLOY_PATH/"
+
+# Restart service
+run_cmd systemctl restart "$SERVICE_NAME"
+
+echo "Deployment completed successfully"
+echo "Backup available at: $BACKUP_DIR"
+```
+
+### Example 3: Log Processing Pipeline
+
+```bash
+#!/bin/bash
+set -Eeuo pipefail
+
+# Process and analyze log files from multiple sources
+readonly LOG_DIR="/var/log/apps"
+readonly OUTPUT_FILE="/tmp/log_analysis_$(date +%Y%m%d).txt"
+readonly ERROR_THRESHOLD=100
+
+# Process logs safely
+process_logs() {
+    local -r log_pattern="$1"
+    local error_count=0
+    
+    while IFS= read -r -d '' logfile; do
+        if [[ ! -r "$logfile" ]]; then
+            echo "WARNING: Cannot read file: $logfile" >&2
+            continue
+        fi
+        
+        # Count errors in this log file
+        local file_errors
+        file_errors=$(grep -c "ERROR" "$logfile" 2>/dev/null || echo "0")
+        error_count=$((error_count + file_errors))
+        
+        echo "$(basename "$logfile"): $file_errors errors"
+    done < <(find "$LOG_DIR" -name "$log_pattern" -type f -print0)
+    
+    echo "---"
+    echo "Total errors: $error_count"
+    
+    # Alert if threshold exceeded
+    if [[ $error_count -gt $ERROR_THRESHOLD ]]; then
+        echo "WARNING: Error count ($error_count) exceeds threshold ($ERROR_THRESHOLD)" >&2
+        return 1
+    fi
+    
+    return 0
+}
+
+# Validate log directory exists
+[[ -d "$LOG_DIR" ]] || {
+    echo "ERROR: Log directory not found: $LOG_DIR" >&2
+    exit 1
+}
+
+# Process logs and save results
+{
+    echo "Log Analysis Report - $(date)"
+    echo "================================"
+    echo ""
+    process_logs "*.log"
+} > "$OUTPUT_FILE"
+
+echo "Analysis complete. Results saved to: $OUTPUT_FILE"
+```
+
 ## Best Practices Summary
 
 1. **Always use strict mode** - `set -Eeuo pipefail`
