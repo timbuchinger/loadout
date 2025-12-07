@@ -279,6 +279,99 @@ Use the skill with real user requests and refine based on:
 - What additional resources would help
 - Whether the description triggers appropriately
 
+## Reviewing and Customizing Existing Skills
+
+When bringing in skills from external sources (such as the Anthropic Skills repository or other skill collections), **always review and customize them** before adding them to the loadout.
+
+### Review Process
+
+Before accepting an external skill:
+
+1. **Read the entire skill** - Understand what it does, how it works, and when it triggers
+2. **Evaluate fit** - Ensure it aligns with the repository's goals and doesn't duplicate existing functionality
+3. **Check quality** - Verify the skill follows the design principles outlined in this guide
+4. **Test the examples** - Run through the provided examples to ensure they work as expected
+
+### Customization Requirements
+
+**You must customize external skills** to ensure they are unique to this repository and optimized for agent effectiveness:
+
+#### 1. Customize Examples
+
+- **Replace generic examples** with specific, relevant scenarios from this repository's domain
+- **Add concrete details** that make examples more actionable and less abstract
+- **Ensure uniqueness** - Examples should reflect the specific use cases and context of this repository
+- **Test examples work** - Verify that customized examples actually function as intended
+
+#### 2. Optimize Content
+
+Apply enhancements that improve agent effectiveness:
+
+- **Clarify ambiguous instructions** - Make steps more explicit and actionable
+- **Add missing context** - Include domain-specific knowledge or prerequisites
+- **Improve triggering** - Refine the description to trigger appropriately for this repository's use cases
+- **Strengthen workflows** - Add decision trees, checkpoints, or validation steps where helpful
+- **Remove redundancy** - Eliminate duplicate or unnecessary content
+
+#### 3. Augment Capabilities
+
+Enhance the skill with improvements that benefit agents:
+
+- **Add references** - Include relevant documentation or schemas in `references/` directory
+- **Bundle scripts** - Add helper scripts in `scripts/` directory for repetitive tasks
+- **Include assets** - Add templates or boilerplate in `assets/` directory
+- **Expand guidelines** - Add best practices or common pitfalls specific to your context
+
+### Goals of Customization
+
+The goal is **optimization and augmentation**, not total revamping:
+
+- ✅ **Do:** Customize examples, clarify instructions, add helpful resources
+- ✅ **Do:** Improve clarity, add context, strengthen workflows
+- ✅ **Do:** Make the skill more effective for agents in this repository
+- ❌ **Don't:** Completely rewrite the skill's core logic or purpose
+- ❌ **Don't:** Change the fundamental approach unless it's clearly broken
+- ❌ **Don't:** Remove working features without good reason
+
+### Example Customization
+
+**Before (Generic):**
+
+```markdown
+## Examples
+- Process data from API
+- Transform results
+- Save to database
+```
+
+**After (Customized):**
+
+```markdown
+## Examples
+- Fetch customer orders from the Shopify API using stored credentials
+- Transform order data to match the internal schema defined in `references/schema.md`
+- Save normalized orders to PostgreSQL using the connection pool in `config/database.ts`
+```
+
+The customized version provides:
+
+- Specific APIs and tools (Shopify, PostgreSQL)
+- References to actual repository files
+- Clear, actionable steps tied to the codebase
+
+### Integration Checklist
+
+Before adding an external skill to the repository:
+
+- [ ] Read and understand the entire skill
+- [ ] Customize all examples with repository-specific details
+- [ ] Clarify any ambiguous instructions
+- [ ] Add helpful enhancements (references, scripts, assets) where appropriate
+- [ ] Update README.md with the skill description
+- [ ] Update `.claude-plugin/marketplace.json` with the skill path
+- [ ] Test the skill with real scenarios
+- [ ] Verify markdown passes linting with `npx markdownlint-cli2 "**/*.md"`
+
 ## Core Design Principles
 
 ### 1. Concise is Key
