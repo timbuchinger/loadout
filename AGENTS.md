@@ -281,7 +281,7 @@ Use the skill with real user requests and refine based on:
 
 ## Reviewing and Customizing Existing Skills
 
-When bringing in skills from external sources (such as the Anthropic Skills repository or other skill collections), **always review and customize them** before adding them to the loadout.
+When bringing in skills from external sources (such as the [Anthropic Skills repository](https://github.com/anthropics/skills) or other skill collections), **always review and customize them** before adding them to the loadout.
 
 ### Review Process
 
@@ -298,9 +298,9 @@ Before accepting an external skill:
 
 #### 1. Customize Examples
 
-- **Replace generic examples** with specific, relevant scenarios from this repository's domain
+- **Replace generic examples** with specific, relevant scenarios for your use case
 - **Add concrete details** that make examples more actionable and less abstract
-- **Ensure uniqueness** - Examples should reflect the specific use cases and context of this repository
+- **Ensure uniqueness** - Examples should reflect the specific use cases and context of your environment
 - **Test examples work** - Verify that customized examples actually function as intended
 
 #### 2. Optimize Content
@@ -317,7 +317,7 @@ Apply enhancements that improve agent effectiveness:
 
 Enhance the skill with improvements that benefit agents:
 
-- **Add references** - Include relevant documentation or schemas in `references/` directory
+- **Add references** - Include relevant documentation or schemas in `references/` directory (see "Bundled Resources" section)
 - **Bundle scripts** - Add helper scripts in `scripts/` directory for repetitive tasks
 - **Include assets** - Add templates or boilerplate in `assets/` directory
 - **Expand guidelines** - Add best practices or common pitfalls specific to your context
@@ -355,9 +355,11 @@ The goal is **optimization and augmentation**, not total revamping:
 
 The customized version provides:
 
-- Specific APIs and tools (Shopify, PostgreSQL)
+- Specific APIs and tools (e.g., Shopify, PostgreSQL - adapt to your domain)
 - References to actual repository files
 - Clear, actionable steps tied to the codebase
+
+**Note:** This example uses e-commerce technologies; adapt to your specific domain (e.g., DevOps, data analysis, web development, etc.).
 
 ### Integration Checklist
 
