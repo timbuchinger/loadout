@@ -17,6 +17,7 @@ Just like choosing the right gear in a game, this loadout ensures your agent has
 - **architecture-documenter** - Documents software architecture with context diagrams, system breakdowns, and component interactions.
 - **aws-troubleshoot** - Troubleshoots AWS services using tool-first access, focusing on EKS, S3, ECR, EC2, SSM, networking, VPNs, IAM Identity Center, and IAM.
 - **azure-troubleshoot** - Troubleshoots Azure services using tool-first access, focusing on VMs, AKS, Container Registry, Storage Accounts, and Log Analytics.
+- **bats-testing-patterns** - Comprehensive guide for writing shell script tests using Bats, including patterns for assertions, setup/teardown, mocking, fixtures, and CI/CD integration.
 - **brainstorming** - Refines rough ideas into fully-formed designs through collaborative questioning, alternative exploration, and incremental validation before writing code.
 - **code-review** - Performs focused code reviews checking for obvious defects only, with minimal feedback and clear approval/rejection format.
 - **create-pull-request** - Creates pull requests with clear, concise descriptions using available tools in the source repository.
