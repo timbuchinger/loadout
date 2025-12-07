@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "loadout-skills",
-      "description": "Collection of engineering and troubleshooting skills including idea brainstorming, cloud platform troubleshooting (AWS, Azure, GCP), observability (Loki, Mimir, Tempo), Kubernetes management, development workflows (TDD, code review, PR creation, git worktrees), bash scripting patterns, web application testing, planning and execution, architecture documentation, user story creation, and skill authoring",
+      "description": "Collection of engineering and troubleshooting skills including idea brainstorming, cloud platform troubleshooting (AWS, Azure, GCP), observability (Loki, Mimir, Tempo), Kubernetes management, development workflows (TDD, code review, PR creation, git worktrees), bash scripting patterns, web application testing, planning and execution, architecture documentation, user story creation, large codebase analysis with Gemini CLI, and skill authoring",
       "source": "./",
       "strict": false,
       "skills": [
@@ -24,6 +24,7 @@
         "./skills/create-pull-request",
         "./skills/executing-plans",
         "./skills/gcp-troubleshoot",
+        "./skills/gemini-cli",
         "./skills/kubernetes-troubleshoot",
         "./skills/loki-troubleshoot",
         "./skills/mimir-prometheus-troubleshoot",

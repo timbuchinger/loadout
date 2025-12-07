@@ -23,6 +23,7 @@ Just like choosing the right gear in a game, this loadout ensures your agent has
 - **create-pull-request** - Creates pull requests with clear, concise descriptions using available tools in the source repository.
 - **executing-plans** - Loads and executes implementation plans in controlled batches with review checkpoints between each batch.
 - **gcp-troubleshoot** - Troubleshoots GCP services using tool-first access, focusing on Firestore, Cloud Run, networking, load balancers, IAM, Pub/Sub, Cloud SQL, and Storage.
+- **gemini-cli** - Uses Gemini CLI to analyze large codebases or multiple files that exceed context limits, leveraging Google Gemini's massive context window for implementation verification and pattern checking.
 - **kubernetes-troubleshoot** - Troubleshoots and manages Kubernetes clusters using MCP server (preferred) or kubectl (fallback) for resource inspection and debugging.
 - **loki-troubleshoot** - Helps craft efficient Grafana Loki/LogQL queries with label-based filtering and narrow time windows.
 - **mimir-prometheus-troubleshoot** - Helps craft efficient Mimir/Prometheus queries and troubleshoot metric issues while avoiding high-cardinality problems.
