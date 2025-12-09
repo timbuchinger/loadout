@@ -1,6 +1,6 @@
 ---
 name: aws-troubleshoot
-description: "Troubleshoot AWS services using tool-first access (via MCP when available), falling back to AWS CLI when necessary. Focus on EKS, S3, ECR, EC2, networking, site-to-site VPNs, IAM Identity Center, and IAM."
+description: "Troubleshoot AWS services using tool-first access (via MCP when available), falling back to AWS CLI when necessary. Focus on EKS, S3, ECR, EC2, SSM, networking, site-to-site VPNs, IAM Identity Center, and IAM."
 ---
 
 # AWS Troubleshooting Skill
@@ -36,7 +36,7 @@ Investigations:
 - Query pod events
 - Inspect node status and cluster metrics
 
-### S33
+### S3
 
 Common issues:
 
@@ -49,7 +49,7 @@ Investigations:
 - Query S3 server access logs
 - Inspect CloudTrail for denied events
 
-### ECRR
+### ECR
 
 Common issues:
 
@@ -62,7 +62,7 @@ Investigations:
 - Search CloudTrail for `ecr:*` denied actions
 - Inspect repository push/pull failures
 
-### EC22
+### EC2
 
 Common issues:
 
@@ -75,7 +75,25 @@ Investigations:
 - Check EC2 instance status checks
 - Inspect system logs and VPC configuration
 
-### Networking & VPNN
+### SSM (Systems Manager)
+
+SSM commands can be performed through the AWS tool when available.
+
+Common issues:
+
+- Agent not running
+- Missing IAM permissions
+- Instance not registered
+- Command execution failures
+
+Investigations:
+
+- Check SSM agent status on instances
+- Query command execution history
+- Inspect CloudTrail for SSM API failures
+- Validate instance profile permissions
+
+### Networking & VPN
 
 Common issues:
 
@@ -88,7 +106,7 @@ Investigations:
 - Query CloudWatch metrics for VPN TunnelState
 - Validate routing tables and security groups
 
-### IAM Identity Center (SSO))
+### IAM Identity Center (SSO)
 
 Common issues:
 
@@ -100,7 +118,7 @@ Investigations:
 - Inspect activity logs for SSO authentication issues
 - Validate permission sets
 
-### IAMM
+### IAM
 
 Common issues:
 

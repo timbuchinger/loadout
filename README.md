@@ -14,10 +14,17 @@ Just like choosing the right gear in a game, this loadout ensures your agent has
 
 ## Available Skills
 
+- **architecture-documenter** - Documents software architecture with context diagrams, system breakdowns, and component interactions.
+- **aws-troubleshoot** - Troubleshoots AWS services using tool-first access, focusing on EKS, S3, ECR, EC2, SSM, networking, VPNs, IAM Identity Center, and IAM.
+- **bash-defensive-patterns** - Applies defensive programming patterns to Bash scripts including strict mode, error handling, safe variable handling, and idempotent design for robust production-ready scripts.
+- **azure-troubleshoot** - Troubleshoots Azure services using tool-first access, focusing on VMs, AKS, Container Registry, Storage Accounts, and Log Analytics.
+- **bats-testing-patterns** - Comprehensive guide for writing shell script tests using Bats, including patterns for assertions, setup/teardown, mocking, fixtures, and CI/CD integration.
 - **brainstorming** - Refines rough ideas into fully-formed designs through collaborative questioning, alternative exploration, and incremental validation before writing code.
 - **code-review** - Performs focused code reviews checking for obvious defects only, with minimal feedback and clear approval/rejection format.
 - **create-pull-request** - Creates pull requests with clear, concise descriptions using available tools in the source repository.
 - **executing-plans** - Loads and executes implementation plans in controlled batches with review checkpoints between each batch.
+- **gcp-troubleshoot** - Troubleshoots GCP services using tool-first access, focusing on Firestore, Cloud Run, networking, load balancers, IAM, Pub/Sub, Cloud SQL, and Storage.
+- **gemini-cli** - Uses Gemini CLI to analyze large codebases or multiple files that exceed context limits, leveraging Google Gemini's massive context window for implementation verification and pattern checking.
 - **kubernetes-troubleshoot** - Troubleshoots and manages Kubernetes clusters using MCP server (preferred) or kubectl (fallback) for resource inspection and debugging.
 - **loki-troubleshoot** - Helps craft efficient Grafana Loki/LogQL queries with label-based filtering and narrow time windows.
 - **mimir-prometheus-troubleshoot** - Helps craft efficient Mimir/Prometheus queries and troubleshoot metric issues while avoiding high-cardinality problems.
