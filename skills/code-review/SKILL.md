@@ -38,6 +38,8 @@ Use available tools to get the PR or code:
 - Git tools for local changes (`git diff`, `git show`)
 - Read files directly if paths provided
 
+- Prefer provider-specific tools (MCP or other integrated tools) over invoking the CLI. For example, use the GitHub MCP tool when available before using the `gh`/GitHub CLI; use the CLI only as a fallback.
+
 ### 2. Focus on Obvious Defects
 
 **Check for:**
@@ -109,6 +111,8 @@ After showing the review:
 **Only submit if user confirms.**
 
 If user declines, treat the review as complete (they can copy/paste or edit before submitting themselves).
+
+When submitting reviews or comments, prefer provider-specific tools (for example, the GitHub MCP tool) over using the CLI; use the CLI only if provider tools are unavailable.
 
 ## Review Examples
 
