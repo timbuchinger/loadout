@@ -113,6 +113,9 @@ Template files are provided in this skill directory:
 - Update diagrams to match reality.
 - Keep diagrams readable and scoped.
 - Maintain consistency across documents.
+- Filenames: All filenames MUST be lowercase and use dashes (-) as word separators. Do not use spaces or underscores.
 - If a suggested template doesn't fit, adapt or skip it.
 - When in doubt about which files to create, ask the user.
 - When in doubt about which files to create, ask the user.
+
+- README maintenance: Keep the repository `README.md` up to date with the current state of the application. Prefer an overview-only README that links to the relevant `docs/architecture/` pages for detailed information.
