@@ -1,4 +1,3 @@
-````markdown
 ---
 name: repo-documenter
 description: "Provide repository-wide documentation guidelines under `docs/`. Use tool-based inspection first, and keep `README.md` and `docs/` in sync with the current state of the app."
@@ -83,5 +82,3 @@ Template files are provided in this skill directory and may be adapted to fit th
 ## Notes
 
 - When adding `docs/usage.md`, include a `Recommended` section near the top with the preferred, simple way to run the app and an optional minimal example config if the app requires configuration.
-
-````
