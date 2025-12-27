@@ -1,0 +1,41 @@
+PUT collections/notes-hybrid
+{
+  "vectors": {
+    "fast-all-minilm-l6-v2": {
+      "size": 384,
+      "distance": "Cosine"
+    }
+  },
+  "sparse_vectors": {
+    "sparse": {}
+  },
+  "payload_schema": {
+    "text": {
+      "type": "text"
+    },
+    "context": {
+      "type": "text"
+    },
+    "type": {
+      "type": "keyword"
+    },
+    "tool": {
+      "type": "keyword"
+    },
+    "tags": {
+      "type": "keyword",
+      "params": {
+        "is_array": true
+      }
+    },
+    "language": {
+      "type": "keyword"
+    },
+    "source": {
+      "type": "keyword"
+    },
+    "created_at": {
+      "type": "datetime"
+    }
+  }
+}

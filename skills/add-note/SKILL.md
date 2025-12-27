@@ -1,6 +1,6 @@
 ---
 name: add-note
-description: Use this skill whenever important information is learned during a task or when the user explicitly asks to store something.
+description: Use this skill whenever important information is learned during a task or when the user explicitly asks to store something. Use when users ask to remember. Triggers on "remember this", "update memory", "share" or any persistent storage request.
 ---
 
 Be **proactive**, but intentional:
@@ -13,7 +13,7 @@ Be **proactive**, but intentional:
 ## What this skill does
 Stores a structured knowledge note in Qdrant for retrieval by AI coding agents.
 
-This skill uses the **Qdrant MCP server** via the **`qdrant-store`** tool.
+This skill uses the **Qdrant MCP server** via the **`qdrant-add-note`** tool.
 
 ---
 
@@ -31,10 +31,8 @@ These rules must be followed exactly:
 
 - **Do not store test notes** unless they contain a concrete, reusable learning
 - **Context is required** unless the text is completely self-explanatory
-- All fields must be **top-level**
-- **Do not introduce new fields**
-- Do **not** use wrappers such as `document`, `metadata`, or similar
-- Only the fields listed below are allowed
+- Only use the fields supported by the `qdrant-add-note` tool
+- All required fields must be provided
 
 If any rule is violated, do **not** store the note.
 
@@ -43,14 +41,11 @@ If any rule is violated, do **not** store the note.
 ## Minimum acceptable note
 A note must meet at least this standard:
 
-```json
-{
-  "text": "<concrete command, endpoint, or learning>",
-  "context": "<when or why this is useful>",
-  "type": "<cli | api | learning | snippet | pattern>",
-  "created_at": "<ISO-8601 timestamp>"
-}
-```
+**Required parameters:**
+- `text`: concrete command, endpoint, or learning
+- `context`: when or why this is useful
+- `type`: one of `cli`, `api`, `learning`, `snippet`, or `pattern`
+- `created_at`: ISO-8601 timestamp
 
 If you cannot fill in all required fields meaningfully, do not store the note.
 
@@ -107,13 +102,12 @@ Examples:
 ---
 
 ### tags (optional)
-Short, lowercase keywords describing concepts or domains.
+Array of short, lowercase keywords describing concepts or domains.
 
 Examples:
-- `kubernetes`
-- `deployments`
-- `auth`
-- `debugging`
+- `["kubernetes", "deployments"]`
+- `["auth", "debugging"]`
+- `["terraform", "aws"]`
 
 ---
 
@@ -145,21 +139,22 @@ Use the current date/time if not explicitly provided.
 
 ---
 
-## Embedding guidance
-- Dense embedding input:
-  ```
-  text + "\n\n" + context
-  ```
-- Sparse vector input:
-  - Generate from `text` only (keywords, flags, identifiers)
-
----
-
 ## Tool usage
-Use the **`qdrant-store`** MCP tool with:
-- Dense vector
-- Sparse vector
-- Flat payload containing only the approved fields
+Use the **`qdrant-add-note`** MCP tool with the following parameters:
+
+**Required:**
+- `text` (string)
+- `context` (string)
+- `type` (string: `cli` | `api` | `learning` | `snippet` | `pattern`)
+- `created_at` (string: ISO-8601 timestamp)
+
+**Optional:**
+- `tool` (string)
+- `tags` (array of strings)
+- `language` (string)
+- `source` (string)
+
+The tool handles vector generation and storage automatically.
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: search-notes
-description: Always use this skill at the start of a task to check whether relevant information already exists.
+description: Always use this skill at the start of a task to check whether relevant information already exists. Use when users ask to recall, search memories, or subscribe to updates. Triggers on "recall", "search memories", "list keys", "share", "subscribe to", or any persistent storage request.
 ---
 
 Also use when:
