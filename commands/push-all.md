@@ -9,15 +9,35 @@ allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*), Bash(git
 
 ## Workflow
 
-### 1. Analyze Changes
+### 1. Analyze Repository and Changes
 
 Run in parallel:
 
 - `git status` - Show modified/added/deleted/untracked files
 - `git diff --stat` - Show change statistics
-- `git log -1 --oneline` - Show recent commit for message style
+- `git branch --show-current` - Show current branch name
 
-### 2. Safety Checks
+**Check for repository-specific rules:**
+
+- Look for `AGENTS.md`, `CONTRIBUTING.md`, `.github/CONTRIBUTING.md` for commit/branch naming conventions
+- Check `.github/workflows/*.yml` for branch name patterns or commit message requirements
+- If repo-specific rules exist, follow those exactly
+
+### 2. Verify Branch Strategy
+
+**Check current branch:**
+
+- If on `main` or `master`:
+  - Check if repo-specific rules allow direct commits to main
+  - If unclear, **ASK USER**: "This repo may require feature branches. Should I create a new branch or commit to main?"
+  - Wait for user response before proceeding
+
+**Branch naming requirements (if creating new branch):**
+
+- Must start with: `feature/`, `fix/`, `docs/`, `chore/`, `refactor/`, `test/`, or `perf/`
+- Example: `feature/add-login`, `fix/api-error`, `docs/readme-update`
+
+### 3. Safety Checks
 
 **❌ STOP and WARN if detected:**
 
@@ -50,7 +70,7 @@ SECRET=${YOUR_SECRET}
 - Correct branch (warn if main/master)
 - API keys are placeholders only
 
-### 3. Request Confirmation
+### 4. Request Confirmation
 
 Present summary:
 
@@ -69,7 +89,7 @@ Type 'yes' to proceed or 'no' to cancel.
 
 **WAIT for explicit "yes" before proceeding.**
 
-### 4. Execute (After Confirmation)
+### 5. Execute (After Confirmation)
 
 Run sequentially:
 
@@ -78,44 +98,43 @@ git add .
 git status  # Verify staging
 ```
 
-### 5. Generate Commit Message
+### 6. Generate Commit Message
 
-Analyze changes and create conventional commit:
+**Priority order for commit message rules:**
 
-**Format:**
+1. **Repository-specific rules** (if found in step 1):
+   - Follow exactly as specified in `AGENTS.md`, `CONTRIBUTING.md`, or workflow files
 
-```text
-[type]: Brief summary (max 72 characters)
+2. **Conventional commits (default)** - Max 8 words, no body:
 
-- Key change 1
-- Key change 2
-- Key change 3
-```
+**Format:** `[type]: Brief summary (max 8 words)`
 
 **Types:** `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`, `build`, `ci`
 
-**Example:**
+**Examples:**
 
 ```text
-docs: Update concept README files with comprehensive documentation
-
-- Add architecture diagrams and tables
-- Include practical examples
-- Expand best practices sections
+feat: Add user authentication system
+fix: Resolve API timeout issue
+docs: Update installation instructions
+refactor: Simplify error handling logic
 ```
 
-### 6. Commit and Push
+**DO NOT include:**
+
+- Multi-line descriptions
+- Body text or bullet points
+- Detailed explanations
+
+### 7. Commit and Push
 
 ```bash
-git commit -m "$(cat <<'EOF'
-[Generated commit message]
-EOF
-)"
-git push  # If fails: git pull --rebase && git push
+git commit -m "[Generated commit message]"
+git push || git pull --rebase && git push
 git log -1 --oneline --decorate  # Verify
 ```
 
-### 7. Confirm Success
+### 8. Confirm Success
 
 ```text
 ✅ Successfully pushed to remote!
@@ -127,12 +146,13 @@ Files changed: X (+insertions, -deletions)
 
 ## Error Handling
 
-- **git add fails**: Check permissions, locked files, verify repo initialized
-- **git commit fails**: Fix pre-commit hooks, check git config (user.name/email)
-- **git push fails**:
-  - Non-fast-forward: `git pull --rebase && git push`
-  - No remote branch: `git push -u origin [branch]`
-  - Protected branch: Use PR workflow instead
+**Common issues:**
+
+- **git add fails**: Check file permissions or if repo is initialized
+- **git commit fails**: Verify git config has user.name and user.email set
+- **git push fails**: Try `git pull --rebase && git push` or check if remote branch exists
+
+For protected branches, use the PR workflow instead.
 
 ## When to Use
 
