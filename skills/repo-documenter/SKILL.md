@@ -1,6 +1,6 @@
 ---
 name: repo-documenter
-description: "Provide repository-wide documentation guidelines under `docs/`. Use tool-based inspection first, and keep `README.md` and `docs/` in sync with the current state of the app."
+description: "Provide repository-wide documentation guidelines under `docs/`. Use tool-based inspection first. Keep README.md updated with a brief project overview and links to detailed docs created under `docs/`."
 ---
 
 # Repository Documenter Skill
@@ -74,7 +74,7 @@ Template files are provided in this skill directory and may be adapted to fit th
 - Keep diagrams readable and scoped.
 - Maintain consistency across documents.
 - Filenames: All filenames MUST be lowercase and use dashes (-) as word separators. Do not use spaces or underscores.
-- README maintenance: Keep the repository `README.md` up to date with the current state of the application. Prefer an overview-only README that links to the relevant `docs/` pages for detailed information.
+- README maintenance: Keep the repository `README.md` up to date with a brief project overview and prominent links to the detailed documentation created under `docs/`. The README should be concise and point readers to `docs/` for full details.
 - Suggested (non-mandatory): Add `docs/usage.md` to provide detailed usage guidelines and examples for users.
 - If a suggested template doesn't fit, adapt or skip it.
 - When in doubt about which files to create, ask the user.
