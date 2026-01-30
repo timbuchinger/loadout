@@ -1,14 +1,17 @@
 ---
 name: aws-troubleshoot
-description: "Troubleshoot AWS services using tool-first access (via MCP when available), falling back to AWS CLI when necessary. Focus on EKS, S3, ECR, EC2, SSM, networking, site-to-site VPNs, IAM Identity Center, and IAM."
+description: "Troubleshoot AWS services using the AWS CLI. Focus on EKS, S3, ECR, EC2, SSM, networking, site-to-site VPNs, IAM Identity Center, and IAM."
 ---
 
 # AWS Troubleshooting Skill
 
 ## General Guidance
 
-Always use **tool access first** for logs, metrics, and audit events.  
-Fallback to AWS CLI commands **only** when deeper inspection is required or the tool cannot access specific data.
+Use **AWS CLI commands** for all AWS service interactions, logs, metrics, and audit events.
+
+**Important**: When constructing AWS CLI commands, always append `--profile <profile-name>` to the end of the command if a specific AWS profile is needed. This ensures commands can be easily added to auto-allow lists with wildcard prefixes.
+
+Example: `aws s3 ls s3://my-bucket --profile production`
 
 All investigations should:
 
@@ -76,8 +79,6 @@ Investigations:
 - Inspect system logs and VPC configuration
 
 ### SSM (Systems Manager)
-
-SSM commands can be performed through the AWS tool when available.
 
 Common issues:
 

@@ -15,7 +15,7 @@ Just like choosing the right gear in a game, this loadout ensures your agent has
 ## Available Skills
 
 - **architecture-documenter** - Documents software architecture with context diagrams, system breakdowns, and component interactions.
-- **aws-troubleshoot** - Troubleshoots AWS services using tool-first access, focusing on EKS, S3, ECR, EC2, SSM, networking, VPNs, IAM Identity Center, and IAM.
+- **aws-troubleshoot** - Troubleshoots AWS services using the AWS CLI, focusing on EKS, S3, ECR, EC2, SSM, networking, VPNs, IAM Identity Center, and IAM.
 - **bash-defensive-patterns** - Applies defensive programming patterns to Bash scripts including strict mode, error handling, safe variable handling, and idempotent design for robust production-ready scripts.
 - **azure-troubleshoot** - Troubleshoots Azure services using tool-first access, focusing on VMs, AKS, Container Registry, Storage Accounts, and Log Analytics.
 - **bats-testing-patterns** - Comprehensive guide for writing shell script tests using Bats, including patterns for assertions, setup/teardown, mocking, fixtures, and CI/CD integration.
