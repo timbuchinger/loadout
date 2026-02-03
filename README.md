@@ -15,7 +15,7 @@ Just like choosing the right gear in a game, this loadout ensures your agent has
 ## Available Skills
 
 - **architecture-documenter** - Documents software architecture with context diagrams, system breakdowns, and component interactions.
-- **aws-troubleshoot** - Troubleshoots AWS services using tool-first access, focusing on EKS, S3, ECR, EC2, SSM, networking, VPNs, IAM Identity Center, and IAM.
+- **aws-troubleshoot** - Troubleshoots AWS services using the AWS CLI, focusing on EKS, S3, ECR, EC2, SSM, networking, VPNs, IAM Identity Center, and IAM.
 - **bash-defensive-patterns** - Applies defensive programming patterns to Bash scripts including strict mode, error handling, safe variable handling, and idempotent design for robust production-ready scripts.
 - **azure-troubleshoot** - Troubleshoots Azure services using tool-first access, focusing on VMs, AKS, Container Registry, Storage Accounts, and Log Analytics.
 - **bats-testing-patterns** - Comprehensive guide for writing shell script tests using Bats, including patterns for assertions, setup/teardown, mocking, fixtures, and CI/CD integration.
@@ -28,6 +28,7 @@ Just like choosing the right gear in a game, this loadout ensures your agent has
 - **kubernetes-troubleshoot** - Troubleshoots and manages Kubernetes clusters using MCP server (preferred) or kubectl (fallback) for resource inspection and debugging.
 - **loki-troubleshoot** - Helps craft efficient Grafana Loki/LogQL queries with label-based filtering and narrow time windows.
 - **mimir-prometheus-troubleshoot** - Helps craft efficient Mimir/Prometheus queries and troubleshoot metric issues while avoiding high-cardinality problems.
+- **playwright-testing** - Complete browser automation with Playwright including auto-detection of dev servers, test script generation, form filling, screenshots, responsive design testing, and login flow validation.
 - **tempo-troubleshoot** - Helps craft efficient Tempo trace queries and troubleshoot distributed traces with links to logs and metrics.
 - **test-driven-development** - Implements features and bugfixes using TDD approach: write test first, watch it fail, write minimal code to pass.
 - **user-story** - Creates well-structured user stories with clear acceptance criteria or task lists for software development.
