@@ -14,6 +14,7 @@ Just like choosing the right gear in a game, this loadout ensures your agent has
 
 ## Available Skills
 
+- **1password** - Manages personal secrets and passwords using 1Password CLI, supporting queries, creation, and retrieval of secrets tagged for agent access.
 - **architecture-documenter** - Documents software architecture with context diagrams, system breakdowns, and component interactions.
 - **aws-troubleshoot** - Troubleshoots AWS services using the AWS CLI, focusing on EKS, S3, ECR, EC2, SSM, networking, VPNs, IAM Identity Center, and IAM.
 - **bash-defensive-patterns** - Applies defensive programming patterns to Bash scripts including strict mode, error handling, safe variable handling, and idempotent design for robust production-ready scripts.
