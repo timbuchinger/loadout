@@ -73,9 +73,18 @@ The frontmatter has 2 required fields:
 
 Optional fields:
 
-- **`license`**: The license applied to the skill
-- **`allowed-tools`**: List of pre-approved tools to run (Claude Code only)
-- **`metadata`**: Map of custom key-value pairs for client-specific properties
+| Field | Description |
+|---|---|
+| `license` | The license applied to the skill |
+| `allowed-tools` | Tools Claude can use without asking permission when this skill is active |
+| `metadata` | Map of custom key-value pairs for client-specific properties |
+| `argument-hint` | Hint shown during autocomplete, e.g. `[issue-number]` or `[filename] [format]` |
+| `disable-model-invocation` | Set `true` to prevent Claude from auto-loading the skill; only you can invoke it via `/skill-name` |
+| `user-invocable` | Set `false` to hide from the `/` menu; Claude can still load it automatically |
+| `model` | Model to use when this skill is active |
+| `context` | Set to `fork` to run the skill in an isolated subagent context |
+| `agent` | Subagent type when `context: fork` is set (`Explore`, `Plan`, `general-purpose`, or a custom agent) |
+| `hooks` | Lifecycle hooks scoped to this skill |
 
 #### Markdown Body (Required)
 
@@ -87,6 +96,76 @@ Instructions and guidance for using the skill. This is only loaded AFTER the ski
 - References to bundled resources
 
 **Best Practice**: Keep the body under 500 lines. If approaching this limit, split content into separate reference files.
+
+### Skill Types
+
+Skills fall into two categories based on how they are used:
+
+**Reference skills** add knowledge Claude applies passively to the current conversation — conventions, patterns, domain knowledge. They load automatically when relevant.
+
+```markdown
+---
+name: api-conventions
+description: API design patterns for this codebase
+---
+
+When writing API endpoints:
+- Use RESTful naming conventions
+- Return consistent error formats
+- Include request validation
+```
+
+**Task skills** give Claude step-by-step instructions for a specific action (deploy, commit, generate). These are usually invoked manually with `/skill-name`. Set `disable-model-invocation: true` to prevent Claude from running them automatically.
+
+```markdown
+---
+name: deploy
+description: Deploy the application to production
+disable-model-invocation: true
+---
+
+Deploy the application:
+1. Run the test suite
+2. Build the application
+3. Push to the deployment target
+```
+
+### Invocation Control
+
+| Frontmatter | You can invoke | Claude can invoke | When loaded into context |
+|---|---|---|---|
+| *(default)* | Yes | Yes | Description always in context; full skill loads when invoked |
+| `disable-model-invocation: true` | Yes | No | Description **not** in context; full skill loads when you invoke |
+| `user-invocable: false` | No | Yes | Description always in context; full skill loads when invoked |
+
+Use `disable-model-invocation: true` for workflows with side effects (e.g. `/deploy`, `/send-slack-message`). Use `user-invocable: false` for background knowledge that isn't a meaningful action for users.
+
+### Argument Substitutions
+
+Skills support placeholders for dynamic values:
+
+| Variable | Description |
+|---|---|
+| `$ARGUMENTS` | All arguments passed when invoking the skill |
+| `$ARGUMENTS[N]` | A specific argument by 0-based index |
+| `$N` | Shorthand for `$ARGUMENTS[N]` (e.g. `$0` for first arg) |
+| `${CLAUDE_SESSION_ID}` | Current session ID, useful for logging or session-specific files |
+
+Use the `argument-hint` frontmatter field to show an autocomplete hint, e.g. `[issue-number]`.
+
+```markdown
+---
+name: fix-issue
+description: Fix a GitHub issue by number
+disable-model-invocation: true
+argument-hint: "[issue-number]"
+---
+
+Fix GitHub issue $ARGUMENTS following our coding standards.
+1. Read the issue description
+2. Implement the fix
+3. Write tests and create a commit
+```
 
 ### 2. Bundled Resources (Optional)
 
@@ -492,6 +571,8 @@ See `references/pdf_library_docs.md` for detailed API documentation.
 
 For more information:
 
+- [Skill Authoring Best Practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) - Official Anthropic best practices guide
+- [Claude Code Skills Reference](https://code.claude.com/docs/en/skills) - Full frontmatter reference and advanced patterns
 - [Agent Skills Spec](https://github.com/anthropics/skills/blob/main/spec/agent-skills-spec.md) - Official specification
 - [Skill Examples](https://github.com/anthropics/skills/tree/main/skills) - Browse real-world skills
 - [Anthropic Skills Documentation](https://support.claude.com/en/articles/12512198-creating-custom-skills)

@@ -11,10 +11,11 @@
   "plugins": [
     {
       "name": "loadout-skills",
-      "description": "Collection of engineering and troubleshooting skills including idea brainstorming, cloud platform troubleshooting (AWS, Azure, GCP), observability (Loki, Mimir, Tempo), Kubernetes management, development workflows (TDD, code review, PR creation, git worktrees), web application testing with Playwright, bash scripting patterns, shell script testing with Bats, planning and execution, architecture documentation, user story creation, large codebase analysis with Gemini CLI, and skill authoring",
+      "description": "Collection of engineering and troubleshooting skills including 1Password secret management, idea brainstorming, cloud platform troubleshooting (AWS, Azure, GCP), observability (Loki, Mimir, Tempo), Kubernetes management, PostgreSQL database management, development workflows (TDD, code review, PR creation, git worktrees), web application testing with Playwright, bash scripting patterns, shell script testing with Bats, planning and execution, architecture documentation, user story creation, large codebase analysis with Gemini CLI, memory management, and skill authoring",
       "source": "./",
       "strict": false,
       "skills": [
+        "./skills/1password",
         "./skills/architecture-documenter",
         "./skills/aws-troubleshoot",
         "./skills/azure-troubleshoot",
@@ -26,10 +27,13 @@
         "./skills/executing-plans",
         "./skills/gcp-troubleshoot",
         "./skills/gemini-cli",
+        "./skills/knowledge-base",
         "./skills/kubernetes-troubleshoot",
         "./skills/loki-troubleshoot",
         "./skills/mimir-prometheus-troubleshoot",
+        "./skills/memory-management",
         "./skills/playwright-testing",
+        "./skills/postgres",
         "./skills/tempo-troubleshoot",
         "./skills/test-driven-development",
         "./skills/user-story",
