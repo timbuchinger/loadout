@@ -30,6 +30,8 @@ Just like choosing the right gear in a game, this loadout ensures your agent has
 - **loki-troubleshoot** - Helps craft efficient Grafana Loki/LogQL queries with label-based filtering and narrow time windows.
 - **mimir-prometheus-troubleshoot** - Helps craft efficient Mimir/Prometheus queries and troubleshoot metric issues while avoiding high-cardinality problems.
 - **playwright-testing** - Complete browser automation with Playwright including auto-detection of dev servers, test script generation, form filling, screenshots, responsive design testing, and login flow validation.
+- **postgres** - Day-to-day PostgreSQL management: running queries, inspecting schemas, inserts/updates/deletes, performance monitoring, and backup/restore via psql or DATABASE_URL.
+- **sql-server** - Day-to-day Microsoft SQL Server management: running queries, inspecting schemas, inserts/updates/deletes, performance monitoring, and backup/restore via sqlcmd.
 - **tempo-troubleshoot** - Helps craft efficient Tempo trace queries and troubleshoot distributed traces with links to logs and metrics.
 - **test-driven-development** - Implements features and bugfixes using TDD approach: write test first, watch it fail, write minimal code to pass.
 - **user-story** - Creates well-structured user stories with clear acceptance criteria or task lists for software development.
