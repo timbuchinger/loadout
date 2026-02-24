@@ -18,6 +18,7 @@ For each piece of information identified:
 **General knowledge** → `~/git/knowledge-base/`
 
 Skip information that is:
+
 - Already well-documented in official docs
 - Temporary or one-off issues
 - Too trivial to need future reference

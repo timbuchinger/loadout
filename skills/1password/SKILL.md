@@ -81,7 +81,7 @@ op read "op://Personal/API Key/credential"
 
 Secret reference format:
 
-```
+```text
 op://vault-name/item-name/[section-name/]field-name
 ```
 

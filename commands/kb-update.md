@@ -9,6 +9,7 @@ Perform comprehensive maintenance on the knowledge base at `~/git/knowledge-base
 7. **Generate report**: Summarize all changes made and any recommendations
 
 Focus on:
+
 - Removing redundant information
 - Improving document structure
 - Ensuring consistent file naming
