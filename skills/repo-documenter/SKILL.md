@@ -32,7 +32,7 @@ When asked to update documentation:
 
 ### Index File (MANDATORY)
 
-**Always create** `docs/architecture/index.md` as the main architecture entry point when architecture documentation is needed. For repository-level docs, ensure `docs/` contains an appropriate `index.md` or similar entry point for the reader.
+**Always create** For repository-level docs, ensure `docs/` contains `index.md` as an entry point for the reader.
 
 This file should:
 
@@ -40,6 +40,22 @@ This file should:
 - Link to other documentation pages (if any exist)
 - Explain the system or repository structure in a way that's readable on its own
 - Include a high-level diagram of key components where helpful
+
+### Per-Application/Service Documentation
+
+For repositories containing multiple applications, services, or agents, create a dedicated documentation file for each:
+
+- `{app-name}.md` - Documentation for each distinct app/service/agent
+
+Use the `app.md` template as guidance. Each app document should include:
+
+- Brief purpose and responsibilities
+- Architecture/component diagram
+- Technology stack
+- Key dependencies and integrations
+- Links to relevant detailed documentation
+
+Example: A repository with `service-a` and `service-b` should have `docs/service-a.md` and `docs/service-b.md`.
 
 ### Optional Supporting Documentation Files
 
@@ -67,6 +83,7 @@ Template files are provided in this skill directory and may be adapted to fit th
 ## Behavioral Rules
 
 - **MANDATORY**: Ensure architecture entry points exist under `docs/architecture/` when architecture content is required.
+- **MANDATORY**: Clean up the `docs/` directory when updating documentation. Remove obsolete files, consolidate outdated docs, and eliminate temporary planning/analysis documents that are no longer relevant.
 - Use tool-based introspection before CLI.
 - Ask for files or context when uncertain.
 - Only create additional documents if the repository complexity warrants them.
@@ -78,6 +95,31 @@ Template files are provided in this skill directory and may be adapted to fit th
 - Suggested (non-mandatory): Add `docs/usage.md` to provide detailed usage guidelines and examples for users.
 - If a suggested template doesn't fit, adapt or skip it.
 - When in doubt about which files to create, ask the user.
+
+## Documentation Cleanup
+
+When updating documentation, actively maintain the `docs/` directory by:
+
+1. **Identify Obsolete Content**: Remove or consolidate:
+   - Draft/planning documents (e.g., `draft-*.md`, `planning-*.md`, `analysis-*.md`)
+   - Superseded documentation (old architecture designs, deprecated setup guides)
+   - Duplicate information that's now consolidated elsewhere
+   - Temporary spike/exploration notes that are no longer relevant
+
+2. **Consolidate Related Content**:
+   - Move fragmented information into single authoritative documents
+   - Remove redundant explanations that exist in multiple places
+   - Ensure only current, active docs remain
+
+3. **Maintain Directory Organization**:
+   - Ensure `docs/apps/`, `docs/services/`, and other directories are clean
+   - Remove empty or abandoned subdirectories
+   - Keep structure flat unless there's complex nested documentation
+
+4. **Verify Documentation Accuracy**:
+   - Stale or outdated docs are actively removed, not left to decay
+   - If content cannot be verified or updated to reflect current reality, delete it
+   - Better to have gaps than misleading documentation
 
 ## Notes
 
