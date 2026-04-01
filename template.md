@@ -1,3 +1,8 @@
+This template is designed to be incorporated into an existing AGENTS.md file. If the content already exists int he target AGENTS.md, then make no changes.
+
+## Pull Requests
+
+Always use the `pr-create` skill when creating pull requests unless repo-specific instructions are available.
 
 ## Memory and Knowledge Base
 
