@@ -33,6 +33,7 @@
         "./skills/mimir-prometheus-troubleshoot",
         "./skills/memory-management",
         "./skills/postgres",
+        "./skills/qmd-knowledge-base",
         "./skills/sql-server",
         "./skills/tempo-troubleshoot",
         "./skills/test-driven-development",
