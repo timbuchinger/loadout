@@ -23,7 +23,7 @@
         "./skills/bash-defensive-patterns",
         "./skills/brainstorming",
         "./skills/code-review",
-        "./skills/create-pull-request",
+        "./skills/pr-create",
         "./skills/executing-plans",
         "./skills/gcp-troubleshoot",
         "./skills/gemini-cli",

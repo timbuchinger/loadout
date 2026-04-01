@@ -22,7 +22,7 @@ Just like choosing the right gear in a game, this loadout ensures your agent has
 - **bats-testing-patterns** - Comprehensive guide for writing shell script tests using Bats, including patterns for assertions, setup/teardown, mocking, fixtures, and CI/CD integration.
 - **brainstorming** - Refines rough ideas into fully-formed designs through collaborative questioning, alternative exploration, and incremental validation before writing code.
 - **code-review** - Performs focused code reviews checking for obvious defects only, with minimal feedback and clear approval/rejection format.
-- **create-pull-request** - Creates pull requests with clear, concise descriptions using available tools in the source repository.
+- **pr-create** - Creates pull requests with clear, concise descriptions using available tools in the source repository.
 - **executing-plans** - Loads and executes implementation plans in controlled batches with review checkpoints between each batch.
 - **gcp-troubleshoot** - Troubleshoots GCP services using tool-first access, focusing on Firestore, Cloud Run, networking, load balancers, IAM, Pub/Sub, Cloud SQL, and Storage.
 - **gemini-cli** - Uses Gemini CLI to analyze large codebases or multiple files that exceed context limits, leveraging Google Gemini's massive context window for implementation verification and pattern checking.
