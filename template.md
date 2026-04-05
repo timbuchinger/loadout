@@ -27,6 +27,7 @@ These skills and tools provide persistent memory across sessions through a searc
 **During task execution:**
 
 - When discovering useful patterns, solutions, or decisions, add them to the knowledge base using kb-add
+- When adding new entries, include links to related existing pages to improve discoverability
 - Do not wait until task completion to save important discoveries
 
 **When secrets are needed:**
