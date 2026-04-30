@@ -9,7 +9,7 @@ Manage personal secrets and passwords using the 1Password CLI (`op`).
 
 ## CRITICAL RULES
 
-1. **Tag Filter**: Only read secrets that have the `agents` tag. All queries MUST include `--tags agents` filter.
+1. **Tag Filter**: Only read secrets that have the `agents` tag. Use `--tags agents` on `op item list` to filter by tag. Do NOT use `--tags` on `op item get` — it is not a valid flag there and will cause an error.
 2. **Confirmation Required**: Always confirm with the user before creating or modifying secrets. No confirmation is needed for reading secrets.
 
 ## Prerequisites
@@ -18,7 +18,7 @@ Before using any `op` commands, ensure:
 
 1. 1Password CLI is installed (`op --version`)
 2. Desktop app integration is enabled (Settings > Developer > Integrate with 1Password CLI)
-3. User is signed in (run any command to trigger authentication)
+3. User is signed in — verify with `op whoami` before attempting any operation
 
 ## Common Operations
 
@@ -49,25 +49,25 @@ op item list --tags agents --vault Personal
 Get full details for an item:
 
 ```bash
-op item get "Item Name" --tags agents
+op item get "Item Name"
 ```
 
 Get specific fields:
 
 ```bash
-op item get "GitHub Token" --tags agents --fields label=username,label=password
+op item get "GitHub Token" --fields label=username,label=password
 ```
 
 Get in JSON format:
 
 ```bash
-op item get "API Key" --tags agents --format json
+op item get "API Key" --format json
 ```
 
 Get one-time password (OTP):
 
 ```bash
-op item get "Google" --tags agents --otp
+op item get "Google" --otp
 ```
 
 ### Read Secret Values
@@ -201,14 +201,22 @@ op item list --tags agents --format json | jq -r '.[] | "\(.title) (\(.vault.nam
 
 ### Get password for a service
 
+When `--fields` returns a single field, the result is a plain string object (not an array) — use `.value` directly:
+
 ```bash
-op item get "Service Name" --tags agents --fields label=password --format json | jq -r '.fields[0].value'
+op item get "Service Name" --fields label=password --format json | jq -r '.value'
+```
+
+When requesting multiple fields, the result is an array — use `.fields[]`:
+
+```bash
+op item get "Service Name" --fields label=username,label=password --format json | jq -r '.fields[] | select(.label=="password") | .value'
 ```
 
 ### Check if an item exists
 
 ```bash
-op item get "Service Name" --tags agents --format json &>/dev/null && echo "exists" || echo "not found"
+op item get "Service Name" --format json &>/dev/null && echo "exists" || echo "not found"
 ```
 
 ### List all API credentials for agents
@@ -243,18 +251,53 @@ Available item categories:
 
 ## Error Handling
 
-If authentication fails:
+### Checking Authentication State
+
+Always verify authentication before attempting operations:
+
+```bash
+op whoami
+```
+
+If this fails, sign in:
 
 ```bash
 op signin
 ```
 
-If item not found, verify:
+### WSL2 / Non-TTY Environments
+
+In WSL2, the 1Password CLI integrates with the Windows desktop app. You must enable this in the **Windows** 1Password app:
+
+> Settings → Developer → **Integrate with 1Password CLI** (check the box)
+
+The same setting exists on macOS:
+
+> Settings → Developer → **Integrate with 1Password CLI**
+
+In non-TTY contexts (CI, scripts, subprocesses), `op signin` cannot prompt for a password interactively and will silently fail. Diagnose with:
+
+```bash
+# Check if the socket/agent is available
+op whoami 2>&1
+
+# If you see: "[ERROR] 2026/... error dialing: no such file or directory"
+# the desktop app integration is not running or not enabled.
+
+# If you see: "[ERROR] ... not currently signed in"
+# trigger sign-in from an interactive terminal first, then retry.
+```
+
+For automated/non-TTY use, prefer a service account token (`OP_SERVICE_ACCOUNT_TOKEN`) or a pre-authenticated session token (`OP_SESSION_<account>`).
+
+### Item Not Found
+
+If an item is not found, verify:
 
 1. Item exists in 1Password
 2. Item has the `agents` tag
 3. Correct vault is accessible
-4. User is properly authenticated
+4. User is properly authenticated (`op whoami`)
 
 ## Best Practices
 
