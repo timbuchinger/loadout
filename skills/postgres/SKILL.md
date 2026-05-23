@@ -21,6 +21,34 @@ psql "$DATABASE_URL"
 psql -h localhost -U user -d dbname
 ```
 
+## Azure PostgreSQL (Entra ID Authentication)
+
+For Azure-hosted PostgreSQL, **prefer Entra ID authentication** over password-based authentication.
+
+Connect using the logged-in user's Entra ID:
+
+```bash
+# Get Entra ID access token
+az account get-access-token --resource-type oss-rdbms --query accessToken -o tsv | \
+  psql "host=myserver.postgres.database.azure.com port=5432 dbname=mydb user=myuser@domain.com sslmode=require" --set=PGPASSWORD=$(cat)
+```
+
+Or set the token as an environment variable:
+
+```bash
+export PGPASSWORD=$(az account get-access-token --resource-type oss-rdbms --query accessToken -o tsv)
+psql "host=myserver.postgres.database.azure.com port=5432 dbname=mydb user=myuser@domain.com sslmode=require"
+```
+
+**Benefits:**
+
+- No password management required
+- Centralized identity and access management
+- Automatic token rotation
+- Enhanced security with MFA support
+
+**Note:** The username must match the Entra ID identity (e.g., `user@domain.com` or the managed identity name).
+
 ## Essential psql Meta-Commands
 
 | Command | Description |
