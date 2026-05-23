@@ -138,7 +138,10 @@ process_item() {
   local item_json
   
   # Get full item details
-  item_json=$(op item get "$item_id" --format json)
+  if ! item_json=$(op item get "$item_id" --format json 2>&1); then
+    echo "Error: Failed to get item $item_id: $item_json" >&2
+    return 1
+  fi
   
   # Extract metadata
   local item_title=$(echo "$item_json" | jq -r '.title')
@@ -165,20 +168,34 @@ process_item() {
     local type=$(echo "$field" | jq -r '.type')
     
     if [[ "$value" != "null" ]] && [[ -n "$value" ]]; then
-      local encrypted=$(encrypt_value "$value")
-      encrypted_fields=$(echo "$encrypted_fields" | jq --arg label "$label" --arg type "$type" --arg enc "$encrypted" \
-        '. += [{label: $label, type: $type, encrypted_value: $enc}]')
+      local encrypted
+      if ! encrypted=$(encrypt_value "$value"); then
+        echo "Error: Failed to encrypt field '$label' in item '$item_title'" >&2
+        return 1
+      fi
+      
+      if ! encrypted_fields=$(echo "$encrypted_fields" | jq --arg label "$label" --arg type "$type" --arg enc "$encrypted" \
+        '. += [{label: $label, type: $type, encrypted_value: $enc}]' 2>&1); then
+        echo "Error: Failed to build encrypted fields JSON: $encrypted_fields" >&2
+        return 1
+      fi
     fi
   done
   
   # Build item object
-  jq -n \
+  local result
+  if ! result=$(jq -n \
     --arg id "$item_id_out" \
     --arg title "$item_title" \
     --arg category "$item_category" \
     --arg tags "$item_tags" \
     --argjson fields "$encrypted_fields" \
-    '{id: $id, title: $title, category: $category, tags: $tags, fields: $fields}'
+    '{id: $id, title: $title, category: $category, tags: $tags, fields: $fields}' 2>&1); then
+    echo "Error: Failed to build final JSON: $result" >&2
+    return 1
+  fi
+  
+  echo "$result"
 }
 
 # Main execution
