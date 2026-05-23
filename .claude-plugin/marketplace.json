@@ -27,6 +27,7 @@
         "./skills/executing-plans",
         "./skills/gcp-troubleshoot",
         "./skills/gemini-cli",
+        "./skills/get-secret",
         "./skills/knowledge-base",
         "./skills/kubernetes-troubleshoot",
         "./skills/loki-troubleshoot",
