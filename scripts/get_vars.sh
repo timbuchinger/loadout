@@ -2,6 +2,9 @@
 
 set -euo pipefail
 
+# Enable debug output
+set -x
+
 # get_vars.sh - Export 1Password entries to encrypted JSON
 # 
 # Usage: get_vars.sh [--vault VAULT_NAME] [--output OUTPUT_FILE]
