@@ -2,9 +2,6 @@
 
 set -euo pipefail
 
-# Enable debug output
-set -x
-
 # get_vars.sh - Export 1Password entries to encrypted JSON
 # 
 # Usage: get_vars.sh [--vault VAULT_NAME] [--output OUTPUT_FILE]
@@ -223,7 +220,7 @@ while IFS= read -r item; do
   
   if processed_item=$(process_item "$item_id"); then
     output_items=$(echo "$output_items" | jq --argjson item "$processed_item" '. += [$item]')
-    ((processed++))
+    processed=$((processed + 1))
     echo "✓"
   else
     echo "Failed (skipping)"
