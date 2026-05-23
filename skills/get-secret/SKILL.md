@@ -1,6 +1,6 @@
 ---
 name: get-secret
-description: Retrieve and decrypt secrets from the local encrypted credential store (~/get_vars.json). Use when the user needs to access stored credentials, API keys, passwords, or other secrets that have been exported from 1Password. This reads from the encrypted JSON file created by the get_vars.sh script.
+description: Retrieve and decrypt secrets from the local encrypted credential store (~/.get_vars.json). Use when the user needs to access stored credentials, API keys, passwords, or other secrets that have been exported from 1Password. This reads from the encrypted JSON file created by the get_vars.sh script.
 ---
 
 # Get Secret
@@ -10,12 +10,12 @@ Retrieve and decrypt secrets from the local encrypted credential store.
 ## Prerequisites
 
 1. **GET_VARS_ENCRYPTION_KEY environment variable** - Must be set to decrypt values
-2. **Encrypted store file** - Must exist at `~/get_vars.json` (created by `scripts/get_vars.sh`)
+2. **Encrypted store file** - Must exist at `~/.get_vars.json` (created by `scripts/get_vars.sh`)
 3. **Required tools** - `jq` and `openssl` must be available
 
 ## How It Works
 
-This skill reads the encrypted JSON file at `~/get_vars.json` and decrypts specific secrets using the `GET_VARS_ENCRYPTION_KEY` environment variable. The file contains items exported from 1Password with all sensitive values encrypted using AES-256-CBC.
+This skill reads the encrypted JSON file at `~/.get_vars.json` and decrypts specific secrets using the `GET_VARS_ENCRYPTION_KEY` environment variable. The file contains items exported from 1Password with all sensitive values encrypted using AES-256-CBC.
 
 ## Common Operations
 
@@ -25,13 +25,13 @@ Before retrieving a secret, you can search for available items:
 
 ```bash
 # List all items with titles and categories
-jq -r '.items[] | "\(.title) (\(.category))"' ~/get_vars.json
+jq -r '.items[] | "\(.title) (\(.category))"' ~/.get_vars.json
 
 # Search for items by title
-jq -r '.items[] | select(.title | contains("GitHub")) | "\(.title) - \(.category)"' ~/get_vars.json
+jq -r '.items[] | select(.title | contains("GitHub")) | "\(.title) - \(.category)"' ~/.get_vars.json
 
 # List items by category
-jq -r '.items[] | select(.category == "LOGIN") | .title' ~/get_vars.json
+jq -r '.items[] | select(.category == "LOGIN") | .title' ~/.get_vars.json
 ```
 
 ### Retrieve and Decrypt a Secret
@@ -40,7 +40,7 @@ To get a decrypted secret value:
 
 ```bash
 # Get a specific field from an item by title and field label
-encrypted_value=$(jq -r '.items[] | select(.title=="GitHub Token") | .fields[] | select(.label=="password") | .encrypted_value' ~/get_vars.json)
+encrypted_value=$(jq -r '.items[] | select(.title=="GitHub Token") | .fields[] | select(.label=="password") | .encrypted_value' ~/.get_vars.json)
 echo "$encrypted_value" | openssl enc -aes-256-cbc -d -a -pbkdf2 -pass pass:"$GET_VARS_ENCRYPTION_KEY"
 ```
 
@@ -50,18 +50,18 @@ echo "$encrypted_value" | openssl enc -aes-256-cbc -d -a -pbkdf2 -pass pass:"$GE
 
 ```bash
 # Get username
-encrypted_username=$(jq -r '.items[] | select(.title=="Service Name") | .fields[] | select(.label=="username") | .encrypted_value' ~/get_vars.json)
+encrypted_username=$(jq -r '.items[] | select(.title=="Service Name") | .fields[] | select(.label=="username") | .encrypted_value' ~/.get_vars.json)
 username=$(echo "$encrypted_username" | openssl enc -aes-256-cbc -d -a -pbkdf2 -pass pass:"$GET_VARS_ENCRYPTION_KEY")
 
 # Get password
-encrypted_password=$(jq -r '.items[] | select(.title=="Service Name") | .fields[] | select(.label=="password") | .encrypted_value' ~/get_vars.json)
+encrypted_password=$(jq -r '.items[] | select(.title=="Service Name") | .fields[] | select(.label=="password") | .encrypted_value' ~/.get_vars.json)
 password=$(echo "$encrypted_password" | openssl enc -aes-256-cbc -d -a -pbkdf2 -pass pass:"$GET_VARS_ENCRYPTION_KEY")
 ```
 
 **Get API credential:**
 
 ```bash
-encrypted_api_key=$(jq -r '.items[] | select(.title=="Service API") | .fields[] | select(.label=="credential") | .encrypted_value' ~/get_vars.json)
+encrypted_api_key=$(jq -r '.items[] | select(.title=="Service API") | .fields[] | select(.label=="credential") | .encrypted_value' ~/.get_vars.json)
 api_key=$(echo "$encrypted_api_key" | openssl enc -aes-256-cbc -d -a -pbkdf2 -pass pass:"$GET_VARS_ENCRYPTION_KEY")
 ```
 
@@ -69,7 +69,7 @@ api_key=$(echo "$encrypted_api_key" | openssl enc -aes-256-cbc -d -a -pbkdf2 -pa
 
 ```bash
 # Get all API credentials
-jq -r '.items[] | select(.category=="API CREDENTIAL") | .title' ~/get_vars.json
+jq -r '.items[] | select(.category=="API CREDENTIAL") | .title' ~/.get_vars.json
 ```
 
 ### Helper Function
@@ -83,7 +83,7 @@ get_secret() {
   
   local encrypted_value=$(jq -r --arg title "$item_title" --arg label "$field_label" \
     '.items[] | select(.title==$title) | .fields[] | select(.label==$label) | .encrypted_value' \
-    ~/get_vars.json)
+    ~/.get_vars.json)
   
   if [[ -z "$encrypted_value" ]] || [[ "$encrypted_value" == "null" ]]; then
     echo "Error: Secret not found: $item_title / $field_label" >&2
@@ -104,7 +104,7 @@ When a user asks for a secret:
 
 1. **Check prerequisites**:
    - Verify `GET_VARS_ENCRYPTION_KEY` is set
-   - Verify `~/get_vars.json` exists
+   - Verify `~/.get_vars.json` exists
    - Verify `jq` and `openssl` are available
 
 2. **Search for the item**:
@@ -166,8 +166,8 @@ fi
 ### File not found
 
 ```bash
-if [[ ! -f ~/get_vars.json ]]; then
-  echo "Error: Encrypted store not found at ~/get_vars.json"
+if [[ ! -f ~/.get_vars.json ]]; then
+  echo "Error: Encrypted store not found at ~/.get_vars.json"
   echo "Run scripts/get_vars.sh to create it"
   exit 1
 fi

@@ -10,11 +10,11 @@ set -euo pipefail
 #   GET_VARS_ENCRYPTION_KEY - Required. Encryption key for securing the output
 #   OP_SESSION_*            - Optional. 1Password session token
 #
-# Output: JSON file with encrypted values in ~/get_vars.json
+# Output: JSON file with encrypted values in ~/.get_vars.json
 # Note: Only exports items tagged with 'agents'
 
 # Configuration
-OUTPUT_FILE="${HOME}/get_vars.json"
+OUTPUT_FILE="${HOME}/.get_vars.json"
 VAULT_NAME=""
 
 # Colors for output
@@ -39,7 +39,7 @@ while [[ $# -gt 0 ]]; do
       echo ""
       echo "Options:"
       echo "  --vault VAULT_NAME    Specific 1Password vault to export from"
-      echo "  --output OUTPUT_FILE  Output file path (default: ~/get_vars.json)"
+      echo "  --output OUTPUT_FILE  Output file path (default: ~/.get_vars.json)"
       echo ""
       echo "Environment variables:"
       echo "  GET_VARS_ENCRYPTION_KEY  Required. Key for encrypting values"
@@ -113,7 +113,14 @@ fi
 # Function to encrypt a value
 encrypt_value() {
   local value="$1"
-  echo -n "$value" | openssl enc -aes-256-cbc -a -salt -pbkdf2 -pass pass:"${GET_VARS_ENCRYPTION_KEY}"
+  if [[ -z "$value" ]]; then
+    echo ""
+    return 0
+  fi
+  echo -n "$value" | openssl enc -aes-256-cbc -a -salt -pbkdf2 -pass pass:"${GET_VARS_ENCRYPTION_KEY}" 2>/dev/null || {
+    echo "Error: Failed to encrypt value" >&2
+    return 1
+  }
 }
 
 # Function to get all items from 1Password with 'agents' tag
@@ -194,11 +201,14 @@ while IFS= read -r item; do
   
   echo -n "Processing: $item_title... "
   
-  processed_item=$(process_item "$item_id")
-  output_items=$(echo "$output_items" | jq --argjson item "$processed_item" '. += [$item]')
-  
-  ((processed++))
-  echo "✓"
+  if processed_item=$(process_item "$item_id"); then
+    output_items=$(echo "$output_items" | jq --argjson item "$processed_item" '. += [$item]')
+    ((processed++))
+    echo "✓"
+  else
+    echo "Failed (skipping)"
+    continue
+  fi
 done < <(echo "$items" | jq -c '.[]')
 
 # Create final output with metadata
