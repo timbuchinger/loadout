@@ -117,7 +117,7 @@ encrypt_value() {
     echo ""
     return 0
   fi
-  echo -n "$value" | openssl enc -aes-256-cbc -a -salt -pbkdf2 -pass pass:"${GET_VARS_ENCRYPTION_KEY}" 2>/dev/null || {
+  printf '%s' "$value" | openssl enc -aes-256-cbc -a -salt -pbkdf2 -pass pass:"${GET_VARS_ENCRYPTION_KEY}" || {
     echo "Error: Failed to encrypt value" >&2
     return 1
   }
